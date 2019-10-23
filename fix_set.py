@@ -1,42 +1,24 @@
-import nltk,spacy,csv
-from nltk.tokenize import word_tokenize
+import csv, spacy
 
-jokes = []
-onejoke = []
+
+# Load spacy module
 nlp = spacy.load("en")
 
-#testi = nlp("Why did the pasta chef take his car into the body shop? Cause it got al dente'd up!")
-#for token in testi:
-#    print(token)
+# List of wh-words
+wh_words = ["what", "who", "why", "how", "when"]
 
-with open("shortjokes.csv","r") as file:
-    
-    csv_reader = csv.reader(file,delimiter=",")
-    line_count = 0
+# Extract profanity words from file
+profanity = []
+with open("profanity_words.txt", "r") as f:
+    for row in f:
+        profanity.append(row.rstrip())
+
+# Read original jokes file, write wanted jokes to new file
+with open("shortjokes.csv", "r") as input_file:
+    csv_reader = csv.reader(input_file, delimiter = ",")
     for row in csv_reader:
         tokenized = nlp(row[1])
-        for token in tokenized:
-            
-            onejoke.append(token.text)
-
-          
-        if(onejoke[0]=="What" or onejoke[0]=="Who" or onejoke[0]=="Why" or onejoke[0]=="How" or onejoke[0]=="When"):
-            
-            with open("output.txt","a") as f:
-                f.write(tokenized.text+"\n")
-                
-                
-
-            
-            
-        
-        onejoke = []
-
-
-        
-        
-        
-    
-    
-    
-#print(len(jokes))
+        # Check that first word is wh-word and that none of the words is offensive
+        if tokenized[0].text.lower() in wh_words and all(w.text not in profanity for w in tokenized):
+            with open("input.txt", "a") as output_file:
+                output_file.write(tokenized.text + "\n")
