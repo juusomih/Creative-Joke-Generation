@@ -1,12 +1,3 @@
-"""
-    LDA-T3113 Creative Natural Language Generation
-
-    Final Project: Joke Generation
-
-    Juuso-Miikka Heikkilä, Tiina Koho, Suvi Tapper
-
-"""
-
 import random
 import spacy
 
