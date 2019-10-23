@@ -32,12 +32,4 @@ def jokes_into_question_answer(inputfile):
             if(len(osat)== 2):
                 parts[osat[0]] = osat[1]
 
-    #for i,j in parts.items():
-    #   print("key "+i +" value"+j)
-
-
-def main():
-    jokes_into_question_answer("testiset.txt")
-
-
-main()
+    return parts
