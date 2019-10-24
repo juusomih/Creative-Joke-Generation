@@ -19,6 +19,6 @@ with open("shortjokes.csv", "r") as input_file:
     for row in csv_reader:
         tokenized = nlp(row[1])
         # Check that first word is wh-word and that none of the words is offensive
-        if tokenized[0].text.lower() in wh_words and all(w.text not in profanity for w in tokenized):
+        if tokenized[0].lemma_ in wh_words and all(w.lemma_ not in profanity for w in tokenized):
             with open("input.txt", "a") as output_file:
                 output_file.write(tokenized.text + "\n")
