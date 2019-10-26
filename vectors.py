@@ -11,6 +11,10 @@ def getfile_as_list(file):
             jokes.append(line)
     return jokes
 
+def getfile_as_whole(file):
+    with open(file,"r") as f:
+        text = f.read()
+    return text
 
 # Lowercase each document, split it by white space
 def lowercase_file():
@@ -51,8 +55,3 @@ def vector_model(vector_corpus,dictionary,texts):
         print(model[dictionary.doc2bow(text)])
 
 
-texts = lowercase_file()
-processed_corpus = count_freq()
-dictionary = word_to_id(processed_corpus)
-vector_corpus = convert_corpus_vectors(processed_corpus,dictionary)
-vector_model(vector_corpus,dictionary,texts)
